@@ -7,6 +7,7 @@ export const adminDataContext = createContext();
 const AdminContext = ({ children }) => {
     let [adminData, setAdminData] = useState("")
     let [dashboardData, setDashboardData] = useState(null)
+    let [blockedUsers, setBlockedUsers] = useState([])
     let { serverUrl } = useContext(AuthContext);
 
     const getAdminData = async () => {
@@ -22,9 +23,17 @@ const AdminContext = ({ children }) => {
         try {
             let response = await axios.get(serverUrl + "/api/admin/getDashboardState", { withCredentials: true });
             setDashboardData(response.data);
-            console.log(response.data);
         } catch (error) {
             setDashboardData(null);
+        }
+    }
+
+    const fetchBlockedUsers = async () => {
+        try {
+            const res = await axios.get(serverUrl + "/api/admin/blocked-users", { withCredentials: true });
+            setBlockedUsers(res.data.blockedUser)
+        } catch (error) {
+            setBlockedUsers(null)
         }
     }
 
@@ -35,13 +44,27 @@ const AdminContext = ({ children }) => {
         getAdminData,
         dashboardData,
         setDashboardData,
-        getDashboardState
+        getDashboardState,
+        fetchBlockedUsers, 
+        blockedUsers
     }
 
     useEffect(() => {
         getAdminData();
-        getDashboardState();
     }, [])
+
+    useEffect(() => {
+        if (adminData) {
+            getDashboardState();
+            fetchBlockedUsers();
+
+            const interval = setInterval(() => {
+                getDashboardState();
+            }, 30000);
+
+            return () => clearInterval(interval);
+        }
+    }, [adminData]);
 
     return (
         <adminDataContext.Provider value={value}>
