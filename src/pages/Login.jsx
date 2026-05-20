@@ -51,7 +51,6 @@ function AdminLogin() {
             src={Logo} 
             alt="Admin Logo" 
             className="w-20 sm:w-24 md:w-28 mx-auto mb-4 hover:scale-105 transition-transform duration-300 drop-shadow-2xl cursor-pointer" 
-            onClick={() => alert("Hii")} 
           />
           <p className="text-xs sm:text-sm md:text-base text-slate-300 font-medium bg-slate-800/90 px-3 sm:px-4 py-2 rounded-xl shadow-lg inline-block">
             Admin Login — DesiZapp Dashboard
