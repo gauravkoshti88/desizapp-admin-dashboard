@@ -14,6 +14,7 @@ import { AuthContext } from "../context/AuthContext";
 import { adminDataContext } from "../context/AdminContext";
 import { IoLogOutOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -35,9 +36,7 @@ const Sidebar = () => {
       const response = await axios.post(serverUrl + "/api/auth/user/logout", {}, { withCredentials: true });
       setAdminData(null)
       setDashboardData(null)
-    } catch (error) {
-      console.log(error);
-      
+    } catch (error) { 
       toast.error("Logout Error", {
         position: "top-right",
         style: { backgroundColor: "orange", color: "white", fontWeight: "bold" },
