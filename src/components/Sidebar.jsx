@@ -13,6 +13,7 @@ import Logo from "../assets/logo.png";
 import { AuthContext } from "../context/AuthContext";
 import { adminDataContext } from "../context/AdminContext";
 import { IoLogOutOutline } from "react-icons/io5";
+import { toast } from "react-toastify";
 
 const Sidebar = () => {
   const navigate = useNavigate();
