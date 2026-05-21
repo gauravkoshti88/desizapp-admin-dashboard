@@ -36,6 +36,8 @@ const Sidebar = () => {
       setAdminData(null)
       setDashboardData(null)
     } catch (error) {
+      console.log(error);
+      
       toast.error("Logout Error", {
         position: "top-right",
         style: { backgroundColor: "orange", color: "white", fontWeight: "bold" },
